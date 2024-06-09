@@ -37,8 +37,6 @@ public class GuessSeidel extends javax.swing.JFrame {
         guessx = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        maxiteration = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -180,18 +178,6 @@ public class GuessSeidel extends javax.swing.JFrame {
         jLabel3.setText("INITIAL GUESS Z");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 270, 30));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("MAX ITERATION:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 190, 30));
-
-        maxiteration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maxiterationActionPerformed(evt);
-            }
-        });
-        getContentPane().add(maxiteration, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 70, 40));
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -264,7 +250,7 @@ public class GuessSeidel extends javax.swing.JFrame {
     guessx.setText("");
     guessy.setText("");
     guessz.setText("");
-    maxiteration.setText("");
+    
 
     // Clear the table
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -286,17 +272,12 @@ public class GuessSeidel extends javax.swing.JFrame {
     private void field12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field12ActionPerformed
-
-    private void maxiterationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxiterationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_maxiterationActionPerformed
 private void gaussSeidel() {
     try {
         // Get input values from text fields
         double x1 = Double.parseDouble(guessx.getText());
         double y1 = Double.parseDouble(guessy.getText());
         double z1 = Double.parseDouble(guessz.getText());
-        int maxIterations = Integer.parseInt(maxiteration.getText()); // Use maxiteration field
         double tolerance = Double.parseDouble(field6.getText());
 
         // Coefficients from the input fields
@@ -322,8 +303,11 @@ private void gaussSeidel() {
         // Add the initial guesses to the table
         model.addRow(new Object[]{"Initial Guess", x1, y1, z1});
 
+        // Safeguard for maximum iterations to prevent infinite loop
+        int maxSafeguardIterations = 10000;
+
         // Perform Gauss-Seidel iterations
-        for (int iteration = 1; iteration <= maxIterations; iteration++) {
+        for (int iteration = 1; iteration <= maxSafeguardIterations; iteration++) {
             double prevX = x1;
             double prevY = y1;
             double prevZ = z1;
@@ -339,6 +323,13 @@ private void gaussSeidel() {
             // Check convergence
             double error = Math.max(Math.abs(x1 - prevX), Math.max(Math.abs(y1 - prevY), Math.abs(z1 - prevZ)));
             if (error < tolerance) {
+                JOptionPane.showMessageDialog(null, "Convergence reached after " + iteration + " iterations.");
+                break;
+            }
+
+            // If maximum safeguard iterations are reached
+            if (iteration == maxSafeguardIterations) {
+                JOptionPane.showMessageDialog(null, "Reached maximum safeguard iterations without convergence.");
                 break;
             }
         }
@@ -371,10 +362,8 @@ private void gaussSeidel() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField maxiteration;
     // End of variables declaration//GEN-END:variables
 }
