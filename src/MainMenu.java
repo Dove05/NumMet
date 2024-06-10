@@ -40,7 +40,7 @@ public class MainMenu extends javax.swing.JFrame {
                 SimpsonActionPerformed(evt);
             }
         });
-        getContentPane().add(Simpson, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 440, 140, 40));
+        getContentPane().add(Simpson, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 460, 140, 30));
 
         GaussSeidel.setBorderPainted(false);
         GaussSeidel.setContentAreaFilled(false);
@@ -49,7 +49,7 @@ public class MainMenu extends javax.swing.JFrame {
                 GaussSeidelActionPerformed(evt);
             }
         });
-        getContentPane().add(GaussSeidel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 140, 40));
+        getContentPane().add(GaussSeidel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 140, 30));
 
         FalsePosition.setBorderPainted(false);
         FalsePosition.setContentAreaFilled(false);
@@ -58,9 +58,9 @@ public class MainMenu extends javax.swing.JFrame {
                 FalsePositionActionPerformed(evt);
             }
         });
-        getContentPane().add(FalsePosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 140, 40));
+        getContentPane().add(FalsePosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 130, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Numericals.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Numetricks.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, 576));
 
