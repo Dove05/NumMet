@@ -91,15 +91,13 @@ public class Simpson extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
@@ -188,11 +186,15 @@ public class Simpson extends javax.swing.JFrame {
     }//GEN-LAST:event_CALCULATEActionPerformed
 
     private void CLEARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLEARActionPerformed
-        // Clear all text fields
-        function.setText("");
-        lowerlimit.setText("");
-        upperlimit.setText("");
-        segments.setText("");
+      // Clear all text fields
+    function.setText("");
+    lowerlimit.setText("");
+    upperlimit.setText("");
+    segments.setText("");
+
+    // Clear table contents
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
     }//GEN-LAST:event_CLEARActionPerformed
   
       private double calculateSimpson(String func, double lowerLimit, double upperLimit, int segmentCount) {
